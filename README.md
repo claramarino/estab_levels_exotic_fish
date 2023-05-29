@@ -1,75 +1,57 @@
 # Exotic species traits across levels of establishment
 ---
 
-Scripts and data for reproducing the results obtained by Bernery, Marino & Bellard (2023) in the paper "Relative importance of exotic species traits in determining invasiveness across levels of establishment: Example of freshwater fish"
+Scripts and data for reproducing the results obtained by Bernery, Marino & Bellard (2023) in the paper "Relative importance of exotic species traits in determining invasiveness across levels of establishment: Example of freshwater fish."
 
 ## Description of the Data and file structure
 
 ### 1. Traits and establishment groups of exotic fish
 
-Data file 00_Traits_alien_iast_birds.rds contains the taxonomy, the traits and the impact information of the 850 bird species involved in biological invasions (864 lines x 21 columns).
-Lines refer to species (note that 14 species are duplicated because they are in both alien and IAS-threatened groups).
-
-Column description:
-- binomial (factor): binomial name of species as in IUCN Red List
-- Ecosystem (binary): impact mechanism includes habitat/ecosystem modification (1) or not (0)
-- Direct_sp_effect (binary): impact mechanism includes a direct effect on species (1) or not (0)
-- Indirect_sp_effect (binary): impact mechanism includes an indirect effect on species (1) or not (0)
-- combi (factor): combination of the three impact mechanisms (columns "Ecosystem", "Direct_sp_effect" and "Indirect_sp_effect" pasted together)
-- group (factor): species is alien ("EICAT") or IAS-threatened ("IAS-T")
-- group2 (factor): species is alien with high impact ("EICAT_imp"), alien with low impact ("EICAT_no_imp"), alien with no information on impact ("EICAT_DD"), IAS-threatened with high impact ("IAS-T_imp") or IAS-threatened with low impact ("IAS-T_no_imp")
-- Species1 (factor): binomial name of species as in AVONET
-- Hand.Wing.Index (numeric): Hand-wing index (ratio, no unit)
-- Tail.Length (numeric): length of the tail (mm)
-- hab_sum (numeric): number of different habitats used
-- insular_endemic (binary): species is insular endemic (1) or not (0)
-- volant (binary): species has the ability to fly (1) or not(0)
-- Trophic.Level (factor): trophic level
-- Primary.Lifestyle (factor): preferential foraging niche
-- ln.Mass (numeric): log-transformed body mass (gram)
-- ln.Clutch (numeric): log-transformed clutch size (number of eggs)
-- ln.Beak.Depth (numeric): log-transformed beak depth (mm)
-- ln.Beak.Length_Nares (numeric): log-transformed beak length (mm)
-- bioreg (factor): bioregion of origin 
-- insul_level (numeric): species is mainland endemic (1), present on mainland and islands (2), insular endemic (3)
-
-
-### 2. Traits of worldwide birds
-
-Data file 00_Traits_worldwide_birds.rds contains the taxonomy and the traits of all worldwide birds (10 943 lines x 13 columns).
+The data file Fish_exo_database.rds contains the taxonomy, traits, and establishment information of the 222 exotic fish (222 lines x 24 columns).
 Lines refer to species.
 
 Column description:
-- binomial (character): binomial name of species as in IUCN Red List
-- Beak.Depth (numeric): beak depth (mm)
-- Hand.Wing.Index (numeric): Hand-wing index (ratio, no unit)
-- Tail.Length (numeric): length of the tail (mm)
-- Mass (numeric): body mass (gram)
-- hab_sum (numeric): number of different habitats used
-- Clutch (numeric): clutch size (number of eggs)
-- Beak.Length_Nares (numeric): beak length (mm)
-- Trophic.Level (character): trophic level
-- Primary.Lifestyle (character): preferential foraging niche
-- bioreg (factor): bioregion of origin 
-- insul_level (numeric): species is mainland endemic (1), present on mainland and islands (2), insular endemic (3)
+- Species (character): binomial name of species as in FishBase
+- EhBd (numeric): Ratio between the eye position and body depth
+- BlBd (numeric): Ratio of body length to body depth. Reflects the hydrodynamism of a species                 
+- PFiBd (numeric): Ratio of pectoral fin position relative to body depth.
+- MoBd (numeric): Ratio between the oral gape position and body depth
+- Length (numeric): Maximum body length of the species (in cm)
+- Freshwater (logical): TRUE is fthe species is from freshwater
+- occ.introduced (numeric): number of basins were the species has at least one established exotic population
+- intro.inside.native.regions (numeric): number of basins were the species has at least one established exotic population inside its native bioregion
+- intro.outside.native.regions (numeric): number of basins were the species has at least one established exotic population outside its native bioregion
+- Inside (binary): species has an exotic population established inside its native bioregion (1) or not (0)
+- Outside (binary): species has an exotic population established outside its native bioregion (1) or not (0)
+- InsideOrOutside (character): location of establishment (OnlyInside, OnlyOutside, InsideAndOutside)
+- detritus (binary): species eats detritus (1) or not (0)
+- nekton (binary): species eats nekton (1) or not (0)
+- plants (binary): species eats plants (1) or not (0)
+- zoobenthos (binary): species eats zoobenthos (1) or not (0)
+- zooplankton (binary): species eats zooplankton (1) or not (0)
+- Nb_diet (numeric): number of different diets consumed by the species
+- RepGuild1 (character): categories of parental care (non-guarder, guarder, and bearer)
+- Area.Bassins (numeric): total area of the native basins (in XXX)
+- MaxBio5 (numeric): ?
+- MinBio6 (numeric): ?
+- Amplitudetemp (numeric) : Range of temperature amplitude of the species’ native basins
 
-### How to use the scripts
 
-The first script computes the axes of the multidimensionnal functional space based on the traits of both alien and IAS-threatened birds. The second script performs the statistical analyses based on the functional space and creates the figures 1 and 4. The third script performs the trait-by-trait analysis and creates the figured 2 and 3. The last script describes the steps implemented for evaluating the prediction of impact type based on the position of birds in the functional space.
+### 2. How to use the scripts
 
+The first script computes the PCoA and derives the axes of the multidimensional functional space based on the traits of all exotic fish. The second script performs the statistical analyses based on the functional space axes and creates Figure 2. The third script performs the hypervolume comparison and makes Figure 3. The last script performs the traits-by-trait analysis.
 
-## Sharing/access Information
+## Sharing/Access Information
 
-Links to other publicly accessible locations of the data:
-https://github.com/claramarino/IAS-T_and_alien_birds
+Links to other publicly accessible locations of the data: https://zenodo.org/record/7982955
 
-Was data derived from another source?
-Data came from AVONET (Tobias et al. 2022), IUCN Red List of threatened species (IUCN 2022), Amniote database (Myhrvold et al. 2015), and EICAT database (Evans et al. 2016)
+Trait data came from FishBase (Froese & Pauly 2019) and FISHMORPH (Brosse et al. 2021), and exotic information came from Tedesco et al. (2017) and Leroy et al. (2019). 
 
-Evans, T. G., Kumschick, S., & Blackburn, T. M. (2016). Application of the Environmental Impact Classification for Alien Taxa (EICAT) to a global assessment of alien bird impacts. Diversity and Distributions, 22(9), 919–931. https://doi.org/10.1111/ddi.12464
+Brosse, S., Charpin, N., Su, G., Toussaint, A., Herrera-R, G. A., Tedesco, P. A., & Villéger, S. (2021). FISHMORPH: A global database on morphological traits of freshwater fishes. Global Ecology and Biogeography, 30(12), 2330–2336. 
 
-IUCN. (2022). The IUCN Red List of Threatened Species. https://www.iucnredlist.org.
+Froese, R., & Pauly, D. (2019). FishBase. World Wide Web electronic publication.
 
-Myhrvold, N. P., Baldridge, E., Chan, B., Sivam, D., Freeman, D. L., & Ernest, S. K. M. (2015). An amniote life-history database to perform comparative analyses with birds, mammals, and reptiles. Ecology, 96(11), 3109–000. https://doi.org/10.1890/15-0846r.1
+Leroy, B., Dias, M. S., Giraud, E., Hugueny, B., Leprieur, F., Oberdorff, T., & Tedesco, P. A. (2019). Global biogeographical regions of freshwater fish species. Journal of Biogeography, 46(11), 2407–2419. https://doi.org/doi.org/10.1111/jbi.13674
 
-Tobias, J. A., Sheard, C., Pigot, A. L., Devenish, A. J. M., Yang, J., Neate-Clegg, M. H. C., Alioravainen, N., Weeks, T. L., Barber, R. A., Walkden, P. A., MacGregor, H. E. A., Jones, S. E. I., Vincent, C., Phillips, A. G., Marples, N. M., Montaño-Centellas, F., Leandro-Silva, V., Claramunt, S., Darski, B., … Schleunning, M. (2021). AVONET: morphological, ecological and geographical data for all birds. Ecology Letters, April, 1–17. https://doi.org/10.1111/ele.13898
+Tedesco, P. A., Beauchard, O., Bigorne, R., Blanchet, S., Buisson, L., Conti, L., Cornu, J.-F., Dias, M. S., Grenouillet, G., Hugueny, B., & others. (2017). A global database on freshwater fish species occurrence in drainage basins. Scientific Data, 4(1), 1–6.
+
