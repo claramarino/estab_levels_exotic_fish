@@ -31,9 +31,9 @@ Column description:
 - zooplankton (binary): species eats zooplankton (1) or not (0)
 - Nb_diet (numeric): number of different diets consumed by the species
 - RepGuild1 (character): categories of parental care (non-guarder, guarder, and bearer)
-- Area.Bassins (numeric): total area of the native basins (in XXX)
-- MaxBio5 (numeric): ?
-- MinBio6 (numeric): ?
+- Area.Bassins (numeric): total area of the native basins (in km²)
+- MaxBio5 (numeric): 95th percentile of maximum temperature of warmest month in the native region (in degrees °C)
+- MinBio6 (numeric): 5th percentile of minimal temperature of coldest month in the native region (in degrees °C)
 - Amplitudetemp (numeric) : Range of temperature amplitude of the species’ native basins
 
 
